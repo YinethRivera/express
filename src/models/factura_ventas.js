@@ -1,29 +1,33 @@
 const { sequelize } = require("../config/database");
 const { DataTypes } = require("sequelize");
-const Usuario = require("./usuarios");
 
-const FacturaVentas = sequelize.define(
-  "FacturaVenta",
+const FacturaVenta = sequelize.define(
+  "factura_venta",
   {
     id_factura: {
       type: DataTypes.INTEGER,
-      autoIncrement: true,
       primaryKey: true,
+      autoIncrement: true,
     },
     estado_factura: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
     fecha_pedido: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: false,
     },
     id_usuario: {
       type: DataTypes.STRING(255),
       references: {
-        model: Usuario,
+        model: "usuarios",
         key: "uid_usuario",
       },
+      allowNull: true,
+    },
+    id_producto: {
+      type: DataTypes.JSONB,
+      allowNull: true,
     },
     precio_total: {
       type: DataTypes.DECIMAL(10, 2),
@@ -37,7 +41,4 @@ const FacturaVentas = sequelize.define(
   }
 );
 
-// Definir la relación entre FacturaVenta y Usuario
-FacturaVentas.belongsTo(Usuario, { foreignKey: "id_usuario" });
-
-module.exports = FacturaVentas;
+module.exports = FacturaVenta;

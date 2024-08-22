@@ -1,12 +1,13 @@
 const { sequelize } = require("../config/database");
 const { DataTypes } = require("sequelize");
 
-const Usuario = sequelize.define(
-  "Usuario",
+const Usuarios = sequelize.define(
+  "usuarios",
   {
     uid_usuario: {
       type: DataTypes.STRING(255),
       primaryKey: true,
+      allowNull: false,
     },
     nombre_completo: {
       type: DataTypes.STRING(255),
@@ -16,9 +17,6 @@ const Usuario = sequelize.define(
       type: DataTypes.STRING(255),
       allowNull: false,
       unique: true,
-      validate: {
-        isEmail: true,
-      },
     },
     telefono: {
       type: DataTypes.STRING(20),
@@ -40,4 +38,4 @@ const Usuario = sequelize.define(
   }
 );
 
-module.exports = Usuario;
+module.exports = Usuarios;

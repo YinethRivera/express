@@ -1,27 +1,27 @@
 const cors = require("cors");
 const express = require("express");
-const bodyParser = require("body-parser");
 const port = 3000;
 
-const routerUsuarios = require("../src/routes/usuariosRoutes");
-const routerVentas = require("../src/routes/ventasRoutes");
-const routerFacturas = require("../src/routes/facturaVentasRoutes");
-const routerCarrito = require("../src/routes/carritoComprasRoutes");
+const routerUsuarios = require("./routes/usuariosRoute");
+const routerVentas = require("./routes/ventasRoute");
+const routerFacturas = require("./routes/facturaVentasRoute");
+const routerCarrito = require("./routes/carritoComprasRoute");
 const { ConexionDB } = require("./config/database");
-
-// const { ConexionDB } = require("./src/config/database");
+const loggerMiddelware = require("./middelwares/loggerMiddelware")
 
 ConexionDB();
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(loggerMiddelware);
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use(cors());
 
 app.use("/usuarios", routerUsuarios);
 app.use("/ventas", routerVentas);
 app.use("/facturas", routerFacturas);
-app.use("/carritos", routerCarrito);
+app.use("/carrito", routerCarrito);
 
 app.listen(port, () => {
   console.log(`Ejecutando en http://localhost:${port}`);

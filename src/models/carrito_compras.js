@@ -1,23 +1,23 @@
 const { sequelize } = require("../config/database");
 const { DataTypes } = require("sequelize");
-const Usuario = require("./usuarios");
 
-const CarritoCompras = sequelize.define(
-  "CarritoCompra",
+const CarritoCompra = sequelize.define(
+  "carrito_compra",
   {
     id_carrito: {
       type: DataTypes.INTEGER,
-      autoIncrement: true,
       primaryKey: true,
+      autoIncrement: true,
     },
-    estado_carrito: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
+    id_producto: {
+      type: DataTypes.JSONB,
+      allowNull: true,
     },
     id_usuario: {
       type: DataTypes.STRING(255),
+      allowNull: true,
       references: {
-        model: Usuario,
+        model: "usuarios",
         key: "uid_usuario",
       },
     },
@@ -29,7 +29,4 @@ const CarritoCompras = sequelize.define(
   }
 );
 
-// Definir la relación entre CarritoCompra y Usuario
-CarritoCompras.belongsTo(Usuario, { foreignKey: "id_usuario" });
-
-module.exports = CarritoCompras;
+module.exports = CarritoCompra;
