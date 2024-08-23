@@ -11,11 +11,9 @@ const FacturaVenta = sequelize.define(
     },
     estado_factura: {
       type: DataTypes.INTEGER,
-      allowNull: true,
     },
     fecha_pedido: {
       type: DataTypes.DATE,
-      allowNull: false,
     },
     id_usuario: {
       type: DataTypes.STRING(255),
@@ -27,11 +25,9 @@ const FacturaVenta = sequelize.define(
     },
     id_producto: {
       type: DataTypes.JSONB,
-      allowNull: true,
     },
     precio_total: {
       type: DataTypes.DECIMAL(10, 2),
-      allowNull: false,
     },
   },
   {

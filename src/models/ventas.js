@@ -19,7 +19,6 @@ const Venta = sequelize.define(
     },
     fecha_venta: {
       type: DataTypes.DATE,
-      allowNull: false,
     },
   },
   {

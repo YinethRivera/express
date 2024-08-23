@@ -11,11 +11,9 @@ const CarritoCompra = sequelize.define(
     },
     id_producto: {
       type: DataTypes.JSONB,
-      allowNull: true,
     },
     id_usuario: {
       type: DataTypes.STRING(255),
-      allowNull: true,
       references: {
         model: "usuarios",
         key: "uid_usuario",
