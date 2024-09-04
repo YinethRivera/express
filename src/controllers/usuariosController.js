@@ -9,6 +9,19 @@ const UsuariosGet = async (req, res) => {
   }
 };
 
+const UsuarioGetById = async (req, res) => {
+  const { uid_usuario } = req.params;
+  try {
+    const usuario = await Usuario.findByPk(uid_usuario);
+    if (!usuario) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+    res.status(200).json(usuario);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 const UsuariosPost = async (req, res) => {
   const {
     uid_usuario,
@@ -83,4 +96,4 @@ const UsuariosDelete = async (req, res) => {
   }
 };
 
-module.exports = { UsuariosGet, UsuariosPost, UsuariosPut, UsuariosDelete };
+module.exports = { UsuariosGet, UsuarioGetById, UsuariosPost, UsuariosPut, UsuariosDelete };

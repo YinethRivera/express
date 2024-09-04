@@ -10,11 +10,10 @@ const CarritoGet = async (req, res) => {
 };
 
 const CarritoPost = async (req, res) => {
-  const { id_carrito, id_producto, id_usuario } = req.body;
+  const { id_producto, id_usuario } = req.body;
 
   try {
     const nuevoCarrito = await CarritoCompra.create({
-      id_carrito,
       id_producto,
       id_usuario,
     });
