@@ -23,9 +23,13 @@ const CarritoPost = async (req, res) => {
   }
 };
 
+
+
 const CarritoPut = async (req, res) => {
   const { id_carrito } = req.params;
-  const { id_producto, id_usuario } = req.body;
+  const { id_producto} = req.body;
+
+
 
   try {
     const carrito = await CarritoCompra.findByPk(id_carrito);
@@ -34,7 +38,6 @@ const CarritoPut = async (req, res) => {
     }
 
     carrito.id_producto = id_producto;
-    carrito.id_usuario = id_usuario;
 
     await carrito.save();
     res.status(200).json(carrito);
