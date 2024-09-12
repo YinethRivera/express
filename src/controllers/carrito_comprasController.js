@@ -1,13 +1,21 @@
 const CarritoCompra = require("../models/carrito_compras");
 
+
+
 const CarritoGet = async (req, res) => {
+  const {id_usuario} = req.params     
   try {
-    const carritos = await CarritoCompra.findAll();
-    res.json(carritos);
+    const carrito = await CarritoCompra.findOne({where: { id_usuario: id_usuario},
+    });
+    res.json(carrito);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
+
+
+
+
 
 const CarritoPost = async (req, res) => {
   const { id_producto, id_usuario } = req.body;
