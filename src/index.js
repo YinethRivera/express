@@ -7,7 +7,7 @@ const routerVentas = require("./routes/ventasRoute");
 const routerFacturas = require("./routes/facturaVentasRoute");
 const routerCarrito = require("./routes/carritoComprasRoute");
 const { ConexionDB } = require("./config/database");
-const loggerMiddelware = require("./middelwares/loggerMiddelware")
+const loggerMiddelware = require("./middelwares/loggerMiddelware");
 
 ConexionDB();
 

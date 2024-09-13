@@ -1,21 +1,26 @@
-const CarritoCompra = require("../models/carrito_compras");
-
-
+const CarritoCompra = require("../models/carrito_compra");
 
 const CarritoGet = async (req, res) => {
-  const {id_usuario} = req.params     
   try {
-    const carrito = await CarritoCompra.findOne({where: { id_usuario: id_usuario},
-    });
+    const carrito = await CarritoCompra.findAll();
     res.json(carrito);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-
-
-
+const CarritoGetByUsuario = async (req, res) => {
+  try {
+    const { uid_usuario } = req.params;
+    console.log(uid_usuario);
+    const carritos = await CarritoCompra.findOne({
+      where: { id_usuario: uid_usuario },
+    });
+    res.json(carritos);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 const CarritoPost = async (req, res) => {
   const { id_producto, id_usuario } = req.body;
@@ -31,16 +36,12 @@ const CarritoPost = async (req, res) => {
   }
 };
 
-
-
 const CarritoPut = async (req, res) => {
-  const { id_carrito } = req.params;
-  const { id_producto} = req.body;
-
-
+  const { id_carritoCompras } = req.params;
+  const { id_producto } = req.body;
 
   try {
-    const carrito = await CarritoCompra.findByPk(id_carrito);
+    const carrito = await CarritoCompra.findByPk(parseInt(id_carritoCompras));
     if (!carrito) {
       return res.status(400).json({ message: "Carrito no encontrado" });
     }
@@ -55,10 +56,10 @@ const CarritoPut = async (req, res) => {
 };
 
 const CarritoDelete = async (req, res) => {
-  const { id_carrito } = req.params;
+  const { uid_carritoCompras } = req.params;
 
   try {
-    const carrito = await CarritoCompra.findByPk(id_carrito);
+    const carrito = await CarritoCompra.findByPk(uid_carritoCompras);
     if (!carrito) {
       return res.status(400).json({ message: "Carrito no encontrado" });
     }
@@ -70,4 +71,10 @@ const CarritoDelete = async (req, res) => {
   }
 };
 
-module.exports = { CarritoGet, CarritoPost, CarritoPut, CarritoDelete };
+module.exports = {
+  CarritoGet,
+  CarritoPost,
+  CarritoGetByUsuario,
+  CarritoPut,
+  CarritoDelete,
+};
