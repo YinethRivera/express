@@ -1,6 +1,6 @@
 const cors = require("cors");
 const express = require("express");
-const port = 3000;
+const port = 3000; // Cambiado de 3000 a 3001
 
 const routerUsuarios = require("./routes/usuariosRoute");
 const routerVentas = require("./routes/ventasRoute");

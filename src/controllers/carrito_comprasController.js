@@ -12,7 +12,6 @@ const CarritoGet = async (req, res) => {
 const CarritoGetByUsuario = async (req, res) => {
   try {
     const { uid_usuario } = req.params;
-    console.log(uid_usuario);
     const carritos = await CarritoCompra.findOne({
       where: { id_usuario: uid_usuario },
     });
@@ -56,10 +55,10 @@ const CarritoPut = async (req, res) => {
 };
 
 const CarritoDelete = async (req, res) => {
-  const { uid_carritoCompras } = req.params;
+  const { id_carrito } = req.params;
 
   try {
-    const carrito = await CarritoCompra.findByPk(uid_carritoCompras);
+    const carrito = await CarritoCompra.findByPk(id_carrito);
     if (!carrito) {
       return res.status(400).json({ message: "Carrito no encontrado" });
     }

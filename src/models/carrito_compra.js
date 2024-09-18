@@ -1,9 +1,6 @@
 const { sequelize } = require("../config/database");
 const { DataTypes } = require("sequelize");
 
-
-
-
 const CarritoCompra = sequelize.define(
   "carrito_compra",
   {
